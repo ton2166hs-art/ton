@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #0A0A0A;
+    --foreground: #F5F1EB;
+    --card: #121212;
+    --card-hover: #1A1A1A;
+    --gold: #D4AF37;
+    --gold-light: #E8CF7A;
+    --gold-dark: #9A7718;
+    --gold-subtle: rgba(212, 175, 55, 0.18);
+    --gold-glow: rgba(212, 175, 55, 0.28);
+    --beige: #F5F1EB;
+    --beige-muted: #B8AF9E;
+    --border-subtle: rgba(212, 175, 55, 0.2);
+  }
+
+  body {
+    background-color: #0A0A0A;
+    color: #F5F1EB;
+    font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 300;
+  }
+}
+
+.font-display {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.font-body {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+/* Letras espaçadas de 8px para o título SMELL GOOD */
+.brand-spacing {
+  letter-spacing: 8px;
+}
+
+.tracking-brand {
+  letter-spacing: 8px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a251b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a84c;
+}

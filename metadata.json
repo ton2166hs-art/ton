@@ -1,0 +1,6 @@
+{
+  "name": "SmellGood Perfumaria",
+  "description": "Loja virtual exclusiva da SmellGood — perfumes artesanais de alta fixação em frascos de 15ml e 60ml, feitos em Sertãozinho/SP.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

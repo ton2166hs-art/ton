@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Radial Background Gradient with Golden Ambience -->
+    <radialGradient id="bgGlow" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#1f1a12" />
+      <stop offset="40%" stop-color="#110f0b" />
+      <stop offset="75%" stop-color="#090807" />
+      <stop offset="100%" stop-color="#050505" />
+    </radialGradient>
+
+    <!-- Warm Golden Rim Lighting -->
+    <radialGradient id="goldBacklight" cx="55%" cy="50%" r="35%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.25" />
+      <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Black Marble Veins Pattern -->
+    <linearGradient id="marbleVein1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0" />
+      <stop offset="35%" stop-color="#c9a84c" stop-opacity="0.12" />
+      <stop offset="50%" stop-color="#dfcf98" stop-opacity="0.22" />
+      <stop offset="65%" stop-color="#c9a84c" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="marbleVein2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06" />
+      <stop offset="55%" stop-color="#c9a84c" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Amber Liquid Gradient -->
+    <linearGradient id="amberLiquid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8a5314" />
+      <stop offset="15%" stop-color="#b87823" />
+      <stop offset="45%" stop-color="#e2a13c" />
+      <stop offset="55%" stop-color="#f5be58" />
+      <stop offset="85%" stop-color="#b87823" />
+      <stop offset="100%" stop-color="#73420d" />
+    </linearGradient>
+
+    <!-- Glass Reflection Highlights -->
+    <linearGradient id="glassReflectionLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="glassReflectionRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="60%" stop-color="#c9a84c" stop-opacity="0.2" />
+      <stop offset="90%" stop-color="#ffffff" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.1" />
+    </linearGradient>
+
+    <!-- Matte Black Cap Gradient -->
+    <linearGradient id="matteBlackCap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#141414" />
+      <stop offset="30%" stop-color="#2a2a2a" />
+      <stop offset="50%" stop-color="#383838" />
+      <stop offset="70%" stop-color="#222222" />
+      <stop offset="100%" stop-color="#111111" />
+    </linearGradient>
+
+    <!-- Gold Metallic Gradient -->
+    <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a37e2c" />
+      <stop offset="30%" stop-color="#e8cd78" />
+      <stop offset="60%" stop-color="#c9a84c" />
+      <stop offset="85%" stop-color="#fceda2" />
+      <stop offset="100%" stop-color="#8b681e" />
+    </linearGradient>
+
+    <!-- Box Front Gradient -->
+    <linearGradient id="boxFront" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#111111" />
+      <stop offset="40%" stop-color="#181818" />
+      <stop offset="80%" stop-color="#141414" />
+      <stop offset="100%" stop-color="#0c0c0c" />
+    </linearGradient>
+
+    <!-- Box Side Gradient (3D Perspective) -->
+    <linearGradient id="boxSide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#080808" />
+      <stop offset="100%" stop-color="#141414" />
+    </linearGradient>
+
+    <!-- Shadow filter for realistic soft ground contact -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="16" />
+      <feOffset dx="0" dy="24" />
+      <feComponentTransfer><feFuncA type="linear" slope="0.85" /></feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 1. Background Black Marble Table & Wall -->
+  <rect width="800" height="800" fill="url(#bgGlow)" />
+  <circle cx="480" cy="420" r="320" fill="url(#goldBacklight)" />
+
+  <!-- Marble Table Surface (Horizon at y=560) -->
+  <path d="M0,560 L800,560 L800,800 L0,800 Z" fill="#0d0c0a" />
+  <line x1="0" y1="560" x2="800" y2="560" stroke="#c9a84c" stroke-opacity="0.15" stroke-width="1.5" />
+
+  <!-- Veins in Marble Table & Wall -->
+  <path d="M40,580 Q220,620 400,590 T760,660" stroke="url(#marbleVein1)" stroke-width="2" fill="none" opacity="0.7" />
+  <path d="M120,690 Q340,650 560,710 T800,680" stroke="url(#marbleVein2)" stroke-width="1.5" fill="none" opacity="0.6" />
+  <path d="M-20,740 Q280,720 540,770 T820,740" stroke="url(#marbleVein1)" stroke-width="2.5" fill="none" opacity="0.5" />
+  <path d="M700,120 Q560,300 480,480" stroke="url(#marbleVein1)" stroke-width="1.8" fill="none" opacity="0.3" />
+  <path d="M150,80 Q320,280 260,520" stroke="url(#marbleVein2)" stroke-width="1.2" fill="none" opacity="0.25" />
+
+  <!-- Ground Shadows -->
+  <!-- Box Shadow -->
+  <ellipse cx="260" cy="650" rx="110" ry="24" fill="#000000" opacity="0.9" />
+  <!-- Bottle Shadow -->
+  <ellipse cx="505" cy="655" rx="90" ry="22" fill="#000000" opacity="0.95" />
+  <!-- Golden Amber Ground Reflection under bottle -->
+  <ellipse cx="505" cy="650" rx="65" ry="12" fill="#c9a84c" opacity="0.18" />
+
+  <!-- ============================================== -->
+  <!-- 2. LUXURY BLACK BOX "SMELL GOOD" (AT LEFT)     -->
+  <!-- ============================================== -->
+  <g id="smellGoodBox">
+    <!-- Box Side (3D Perspective Left Face) -->
+    <path d="M165,270 L210,240 L210,630 L165,655 Z" fill="url(#boxSide)" stroke="#1a1a1a" stroke-width="0.8" />
+
+    <!-- Box Front Face -->
+    <rect x="210" y="240" width="135" height="390" rx="2" fill="url(#boxFront)" stroke="#222222" stroke-width="1" />
+
+    <!-- Golden Embossed Double Border on Box Front -->
+    <rect x="222" y="252" width="111" height="366" fill="none" stroke="url(#goldMetallic)" stroke-width="1" opacity="0.8" />
+    <rect x="226" y="256" width="103" height="358" fill="none" stroke="url(#goldMetallic)" stroke-width="0.5" opacity="0.4" />
+
+    <!-- Gold Foil Lotus Flower on Box Top -->
+    <g transform="translate(277.5, 335) scale(0.7)" stroke="url(#goldMetallic)" fill="none" stroke-width="2">
+      <!-- Center Petal -->
+      <path d="M0,20 C-10,-5 0,-30 0,-30 C0,-30 10,-5 0,20 Z" fill="url(#goldMetallic)" fill-opacity="0.3" />
+      <!-- Left Petal -->
+      <path d="M0,20 C-25,12 -38,-10 -30,-22 C-20,-12 -8,-2 0,20 Z" fill="url(#goldMetallic)" fill-opacity="0.2" />
+      <!-- Right Petal -->
+      <path d="M0,20 C25,12 38,-10 30,-22 C20,-12 8,-2 0,20 Z" fill="url(#goldMetallic)" fill-opacity="0.2" />
+      <!-- Base Curve -->
+      <path d="M-22,20 Q0,28 22,20" stroke-width="2" />
+    </g>
+
+    <!-- Box Brand Typography -->
+    <text x="277.5" y="420" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" letter-spacing="4" fill="url(#goldMetallic)" font-weight="600">SMELL GOOD</text>
+    <text x="277.5" y="440" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="8.5" letter-spacing="5" fill="#f4efe6" opacity="0.85">PARFUM</text>
+    <line x1="245" y1="455" x2="310" y2="455" stroke="url(#goldMetallic)" stroke-width="0.8" opacity="0.6" />
+    <text x="277.5" y="475" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="7" letter-spacing="3" fill="url(#goldMetallic)" opacity="0.9">60ML · EAU DE PARFUM</text>
+    <text x="277.5" y="490" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="6.5" letter-spacing="2.5" fill="#888888">ALTA FIXAÇÃO</text>
+
+    <!-- Box Bottom Signature -->
+    <text x="277.5" y="585" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="6" letter-spacing="2.5" fill="url(#goldMetallic)" opacity="0.7">SERTÃOZINHO · SP</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- 3. CYLINDRICAL CLEAR GLASS 60ML BOTTLE WITH AMBER LIQUID -->
+  <!-- ======================================================== -->
+  <g id="cylindricalBottle">
+    <!-- Bottle Outer Dimensions: Width 140px, Height 290px (from y=350 to y=640), Center X = 505 -->
+
+    <!-- Glass Bottle Body Back (Transparent with ambient dark backdrop) -->
+    <rect x="435" y="350" width="140" height="290" rx="8" fill="#120e09" opacity="0.7" />
+
+    <!-- Glowing Amber Liquid (Filling 82% of cylinder) -->
+    <g id="liquidInside">
+      <rect x="440" y="395" width="130" height="235" rx="4" fill="url(#amberLiquid)" />
+      <!-- Liquid Meniscus / Top Ellipse -->
+      <ellipse cx="505" cy="395" rx="65" ry="8" fill="#f8cf6e" opacity="0.9" />
+      <ellipse cx="505" cy="395" rx="61" ry="6" fill="#df9b32" opacity="0.8" />
+      <!-- Internal liquid glow and depth -->
+      <path d="M444,402 L444,625 Q505,635 566,625 L566,402 Q505,410 444,402 Z" fill="#b06e18" opacity="0.35" />
+    </g>
+
+    <!-- Heavy Luxury Glass Base (Thick clear solid glass bottom) -->
+    <rect x="436" y="618" width="138" height="24" rx="4" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.25" stroke-width="0.8" />
+    <line x1="442" y1="624" x2="568" y2="624" stroke="url(#goldMetallic)" stroke-opacity="0.4" stroke-width="1" />
+
+    <!-- Glass Specular Reflections (Left & Right Highlights) -->
+    <!-- Left bright reflection stripe -->
+    <rect x="438" y="355" width="18" height="280" rx="3" fill="url(#glassReflectionLeft)" />
+    <!-- Right subtle reflection stripe -->
+    <rect x="555" y="355" width="16" height="280" rx="3" fill="url(#glassReflectionRight)" />
+    <!-- Center delicate light wash -->
+    <line x1="470" y1="365" x2="470" y2="630" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2" stroke-linecap="round" />
+
+    <!-- Outer Glass Edge Highlight Contour -->
+    <rect x="435" y="350" width="140" height="290" rx="8" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="1.5" />
+    <rect x="436.5" y="351.5" width="137" height="287" rx="7" fill="none" stroke="url(#goldMetallic)" stroke-opacity="0.25" stroke-width="0.8" />
+
+    <!-- ============================================== -->
+    <!-- 4. BLACK LABEL WITH GOLDEN LOTUS FLOWER        -->
+    <!-- ============================================== -->
+    <!-- Centered on cylinder: Width 110px, Height 145px, y=430 -->
+    <g id="blackLotusLabel" filter="url(#softShadow)">
+      <!-- Label Base (Matte Black with texture) -->
+      <rect x="450" y="430" width="110" height="142" rx="2" fill="#0d0d0d" stroke="#1f1f1f" stroke-width="1" />
+      
+      <!-- Label Gold Border -->
+      <rect x="454" y="434" width="102" height="134" rx="1" fill="none" stroke="url(#goldMetallic)" stroke-width="0.9" opacity="0.9" />
+
+      <!-- STYLIZED GOLDEN LOTUS FLOWER (FLOR DE LÓTUS DOURADA) -->
+      <g transform="translate(505, 464) scale(0.6)" stroke="url(#goldMetallic)" fill="none" stroke-width="1.8">
+        <!-- Center Lotus Petal -->
+        <path d="M0,16 C-8,-4 0,-24 0,-24 C0,-24 8,-4 0,16 Z" fill="url(#goldMetallic)" fill-opacity="0.45" />
+        <!-- Left Outer Petal -->
+        <path d="M0,16 C-20,9 -30,-8 -24,-18 C-16,-10 -6,-1 0,16 Z" fill="url(#goldMetallic)" fill-opacity="0.3" />
+        <!-- Right Outer Petal -->
+        <path d="M0,16 C20,9 30,-8 24,-18 C16,-10 6,-1 0,16 Z" fill="url(#goldMetallic)" fill-opacity="0.3" />
+        <!-- Base Water Line / Cradle -->
+        <path d="M-18,16 Q0,23 18,16" stroke-width="1.8" />
+        <circle cx="0" cy="-28" r="1.5" fill="url(#goldMetallic)" />
+      </g>
+
+      <!-- Label Text -->
+      <text x="505" y="497" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="13" letter-spacing="3" fill="url(#goldMetallic)" font-weight="600">SMELL GOOD</text>
+      <text x="505" y="511" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="6.5" letter-spacing="4" fill="#ffffff" opacity="0.9">PARFUM</text>
+      
+      <line x1="475" y1="520" x2="535" y2="520" stroke="url(#goldMetallic)" stroke-width="0.6" opacity="0.7" />
+      
+      <text x="505" y="534" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="10" font-style="italic" letter-spacing="1.5" fill="#f4efe6">Coleção Exclusiva</text>
+      
+      <text x="505" y="552" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="6.5" letter-spacing="2" fill="url(#goldMetallic)" font-weight="500">60ML · 2.0 FL.OZ</text>
+    </g>
+
+    <!-- ============================================== -->
+    <!-- 5. MATTE BLACK CAP & GOLDEN COLLAR             -->
+    <!-- ============================================== -->
+    <!-- Gold Collar Ring at Bottle Neck -->
+    <rect x="475" y="338" width="60" height="14" rx="1" fill="url(#goldMetallic)" stroke="#684a14" stroke-width="0.5" />
+    <line x1="475" y1="345" x2="535" y2="345" stroke="#ffffff" stroke-width="0.8" opacity="0.6" />
+
+    <!-- Matte Black Cap (Cylindrical, Height 75px, Width 68px, y=265) -->
+    <g id="matteBlackCapGroup">
+      <rect x="471" y="265" width="68" height="74" rx="2" fill="url(#matteBlackCap)" stroke="#333333" stroke-width="0.8" />
+      <!-- Cap top bevel -->
+      <ellipse cx="505" cy="266" rx="34" ry="4" fill="#3a3a3a" />
+      <ellipse cx="505" cy="265" rx="33" ry="3.5" fill="#242424" />
+      <!-- Subtle side highlight on matte cap -->
+      <line x1="477" y1="270" x2="477" y2="335" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5" />
+      <!-- Subtle right rim light -->
+      <line x1="534" y1="270" x2="534" y2="335" stroke="url(#goldMetallic)" stroke-opacity="0.3" stroke-width="1" />
+    </g>
+  </g>
+</svg>

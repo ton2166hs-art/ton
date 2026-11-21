@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlowPocket" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#1f1a12" />
+      <stop offset="40%" stop-color="#110f0b" />
+      <stop offset="75%" stop-color="#090807" />
+      <stop offset="100%" stop-color="#050505" />
+    </radialGradient>
+
+    <radialGradient id="goldBacklightPocket" cx="50%" cy="50%" r="35%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.28" />
+      <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="amberLiquidPocket" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8a5314" />
+      <stop offset="15%" stop-color="#b87823" />
+      <stop offset="45%" stop-color="#e2a13c" />
+      <stop offset="55%" stop-color="#f5be58" />
+      <stop offset="85%" stop-color="#b87823" />
+      <stop offset="100%" stop-color="#73420d" />
+    </linearGradient>
+
+    <linearGradient id="glassReflectionLeftPocket" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5" />
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="glassReflectionRightPocket" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="60%" stop-color="#c9a84c" stop-opacity="0.25" />
+      <stop offset="90%" stop-color="#ffffff" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.1" />
+    </linearGradient>
+
+    <linearGradient id="matteBlackCapPocket" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#141414" />
+      <stop offset="30%" stop-color="#2a2a2a" />
+      <stop offset="50%" stop-color="#383838" />
+      <stop offset="70%" stop-color="#222222" />
+      <stop offset="100%" stop-color="#111111" />
+    </linearGradient>
+
+    <linearGradient id="goldMetallicPocket" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a37e2c" />
+      <stop offset="30%" stop-color="#e8cd78" />
+      <stop offset="60%" stop-color="#c9a84c" />
+      <stop offset="85%" stop-color="#fceda2" />
+      <stop offset="100%" stop-color="#8b681e" />
+    </linearGradient>
+
+    <linearGradient id="marbleVeinPocket" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0" />
+      <stop offset="45%" stop-color="#dfcf98" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Black Marble -->
+  <rect width="800" height="800" fill="url(#bgGlowPocket)" />
+  <circle cx="400" cy="430" r="300" fill="url(#goldBacklightPocket)" />
+
+  <!-- Marble Table Surface (Horizon at y=560) -->
+  <path d="M0,560 L800,560 L800,800 L0,800 Z" fill="#0d0c0a" />
+  <line x1="0" y1="560" x2="800" y2="560" stroke="#c9a84c" stroke-opacity="0.15" stroke-width="1.5" />
+  <path d="M50,600 Q300,580 600,640 T780,720" stroke="url(#marbleVeinPocket)" stroke-width="1.8" fill="none" opacity="0.6" />
+  <path d="M-10,720 Q280,680 500,750 T810,710" stroke="url(#marbleVeinPocket)" stroke-width="2.2" fill="none" opacity="0.4" />
+
+  <!-- Ground Shadows -->
+  <ellipse cx="400" cy="650" rx="90" ry="20" fill="#000000" opacity="0.95" />
+  <ellipse cx="400" cy="648" rx="55" ry="10" fill="#c9a84c" opacity="0.22" />
+
+  <!-- 15ML CYLINDRICAL SLIM POCKET BOTTLE -->
+  <g id="pocketBottle">
+    <!-- Bottle Body (Slim elegant cylinder): Width 80px, Height 310px, x=360, y=330 -->
+    <rect x="360" y="330" width="80" height="310" rx="6" fill="#120e09" opacity="0.7" />
+
+    <!-- Amber Liquid inside -->
+    <rect x="364" y="375" width="72" height="258" rx="3" fill="url(#amberLiquidPocket)" />
+    <!-- Meniscus -->
+    <ellipse cx="400" cy="375" rx="36" ry="5.5" fill="#f8cf6e" opacity="0.9" />
+
+    <!-- Thick glass base -->
+    <rect x="361" y="618" width="78" height="20" rx="3" fill="#ffffff" fill-opacity="0.09" stroke="#ffffff" stroke-opacity="0.28" stroke-width="0.8" />
+    <line x1="366" y1="623" x2="434" y2="623" stroke="url(#goldMetallicPocket)" stroke-opacity="0.35" stroke-width="0.8" />
+
+    <!-- Highlights -->
+    <rect x="362" y="335" width="10" height="295" rx="2" fill="url(#glassReflectionLeftPocket)" />
+    <rect x="428" y="335" width="9" height="295" rx="2" fill="url(#glassReflectionRightPocket)" />
+    <line x1="382" y1="345" x2="382" y2="625" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5" stroke-linecap="round" />
+
+    <!-- Glass Contour -->
+    <rect x="360" y="330" width="80" height="310" rx="6" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.2" />
+
+    <!-- BLACK POCKET LABEL -->
+    <g id="pocketLabel">
+      <rect x="368" y="415" width="64" height="150" rx="1.5" fill="#0d0d0d" stroke="#222222" stroke-width="0.8" />
+      <rect x="371" y="418" width="58" height="144" rx="1" fill="none" stroke="url(#goldMetallicPocket)" stroke-width="0.7" opacity="0.85" />
+
+      <!-- Golden Lotus Flower Mini -->
+      <g transform="translate(400, 442) scale(0.42)" stroke="url(#goldMetallicPocket)" fill="none" stroke-width="2">
+        <path d="M0,16 C-8,-4 0,-24 0,-24 C0,-24 8,-4 0,16 Z" fill="url(#goldMetallicPocket)" fill-opacity="0.45" />
+        <path d="M0,16 C-20,9 -30,-8 -24,-18 C-16,-10 -6,-1 0,16 Z" fill="url(#goldMetallicPocket)" fill-opacity="0.3" />
+        <path d="M0,16 C20,9 30,-8 24,-18 C16,-10 6,-1 0,16 Z" fill="url(#goldMetallicPocket)" fill-opacity="0.3" />
+        <path d="M-18,16 Q0,23 18,16" stroke-width="2" />
+      </g>
+
+      <text x="400" y="470" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="9" letter-spacing="2" fill="url(#goldMetallicPocket)" font-weight="600">SMELL GOOD</text>
+      <text x="400" y="482" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="5" letter-spacing="2.5" fill="#ffffff" opacity="0.9">PARFUM</text>
+      <line x1="380" y1="490" x2="420" y2="490" stroke="url(#goldMetallicPocket)" stroke-width="0.5" opacity="0.6" />
+      <text x="400" y="505" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="7.5" font-style="italic" letter-spacing="1" fill="#f4efe6">Pocket Edition</text>
+      <text x="400" y="525" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="5.5" letter-spacing="1.5" fill="url(#goldMetallicPocket)" font-weight="bold">15ML</text>
+      <text x="400" y="538" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="4.5" letter-spacing="1" fill="#888888">ALTA FIXAÇÃO</text>
+    </g>
+
+    <!-- Collar -->
+    <rect x="382" y="320" width="36" height="12" rx="1" fill="url(#goldMetallicPocket)" stroke="#684a14" stroke-width="0.5" />
+
+    <!-- Matte Black Cap for Pocket (Slim cylinder) -->
+    <rect x="380" y="240" width="40" height="82" rx="2" fill="url(#matteBlackCapPocket)" stroke="#333333" stroke-width="0.8" />
+    <ellipse cx="400" cy="241" rx="20" ry="3" fill="#3a3a3a" />
+    <line x1="384" y1="245" x2="384" y2="320" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.2" />
+    <line x1="417" y1="245" x2="417" y2="320" stroke="url(#goldMetallicPocket)" stroke-opacity="0.3" stroke-width="0.8" />
+  </g>
+</svg>

@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <title>Painel do Lojista — SMELL GOOD Perfumes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      :root {
+        --background: #0A0A0A;
+        --foreground: #F5F1EB;
+        --gold: #D4AF37;
+      }
+      body {
+        background-color: #0A0A0A;
+        color: #F5F1EB;
+        font-family: 'Montserrat', 'Inter', sans-serif;
+        font-weight: 300;
+      }
+      .font-display {
+        font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+      }
+      .brand-title {
+        font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+        font-weight: 400;
+        letter-spacing: 8px;
+      }
+    </style>
+  </head>
+  <body class="bg-[#0A0A0A] text-[#F5F1EB] min-h-screen antialiased selection:bg-[#D4AF37]/30 selection:text-[#F5F1EB]">
+    <!-- Top Announcement Bar -->
+    <header class="bg-[#0A0A0A] border-b border-[#D4AF37]/30 sticky top-0 z-40 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3.5 group">
+          <svg class="w-8 h-8 text-[#D4AF37]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8 C30 20 25 36 32 50 C39 36 34 20 32 8 Z" fill="#D4AF37" opacity="0.95"/>
+            <path d="M32 50 C23 44 14 32 18 20 C23 28 28 40 32 50 Z" fill="#D4AF37" opacity="0.8"/>
+            <path d="M32 50 C41 44 50 32 46 20 C41 28 36 40 32 50 Z" fill="#D4AF37" opacity="0.8"/>
+            <path d="M32 50 C19 49 6 42 10 32 C17 37 25 45 32 50 Z" fill="#D4AF37" opacity="0.65"/>
+            <path d="M32 50 C45 49 58 42 54 32 C47 37 39 45 32 50 Z" fill="#D4AF37" opacity="0.65"/>
+            <path d="M16 50 Q32 56 48 50 Q32 53 16 50 Z" fill="#D4AF37"/>
+          </svg>
+          <div>
+            <span class="font-display text-lg sm:text-xl font-normal tracking-[8px] text-[#F5F1EB] uppercase block">
+              SMELL GOOD
+            </span>
+            <span class="text-[8px] tracking-[3px] uppercase text-[#D4AF37] font-light block mt-1">
+              Painel Administrativo do Lojista
+            </span>
+          </div>
+        </a>
+
+        <!-- Header Actions: Export, Import, Back to Store -->
+        <div id="headerActions" class="hidden flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+          <button
+            id="btnExportJson"
+            class="px-3 py-1.5 text-[11px] uppercase tracking-[1.5px] font-medium border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0A0A0A] transition-all rounded-xs flex items-center gap-1.5 cursor-pointer"
+            title="Baixar cópia de segurança em JSON"
+          >
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            <span class="hidden sm:inline">EXPORTAR JSON</span>
+            <span class="sm:hidden">EXPORTAR</span>
+          </button>
+
+          <label
+            for="importJsonInput"
+            class="px-3 py-1.5 text-[11px] uppercase tracking-[1.5px] font-medium border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0A0A0A] transition-all rounded-xs flex items-center gap-1.5 cursor-pointer"
+            title="Importar lista de produtos em JSON"
+          >
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/>
+            </svg>
+            <span class="hidden sm:inline">IMPORTAR JSON</span>
+            <span class="sm:hidden">IMPORTAR</span>
+          </label>
+          <input type="file" id="importJsonInput" accept=".json,application/json" class="hidden" />
+
+          <a
+            href="/"
+            class="px-3.5 py-1.5 text-[11px] uppercase tracking-[1.5px] font-medium bg-[#D4AF37] text-[#0A0A0A] hover:bg-[#E5C464] transition-all rounded-xs flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>Ver Loja</span>
+            <span>&rarr;</span>
+          </a>
+
+          <button
+            id="btnLogout"
+            class="text-[11px] text-[#888] hover:text-[#F5F1EB] uppercase tracking-[1.5px] transition-colors ml-2 cursor-pointer"
+          >
+            Sair
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <!-- 1. AUTHENTICATION MODAL (Senha smellgood2026) -->
+      <div id="authScreen" class="max-w-md mx-auto bg-[#121212] border border-[#D4AF37]/40 p-8 rounded-sm shadow-[0_0_50px_rgba(212,175,55,0.15)] text-center space-y-6 my-12">
+        <div class="space-y-2">
+          <div class="inline-flex items-center justify-center p-3 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/40 text-[#D4AF37] mb-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl text-[#F5F1EB] font-normal">Acesso ao Painel Lojista</h2>
+          <p class="font-body text-xs text-[#B8AF9E] font-light">Digite a senha administrativa da SMELL GOOD para editar perfumes, valores e fotos.</p>
+        </div>
+
+        <form id="authForm" class="space-y-4">
+          <div>
+            <input
+              type="password"
+              id="adminPassword"
+              placeholder="Digite sua senha..."
+              autocomplete="current-password"
+              class="w-full px-4 py-3 bg-[#0A0A0A] border border-[#D4AF37]/40 text-center tracking-[3px] text-sm text-[#F5F1EB] placeholder-[#666] focus:border-[#D4AF37] focus:outline-none rounded-xs"
+              required
+            />
+            <p id="authError" class="text-red-400 text-xs mt-2 hidden">Senha incorreta. A senha é: smellgood2026</p>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-3.5 bg-[#D4AF37] hover:bg-[#E5C464] text-[#0A0A0A] text-xs uppercase tracking-[3px] font-bold transition-all shadow-[0_0_20px_rgba(212,175,55,0.25)] rounded-xs cursor-pointer"
+          >
+            Acessar Painel
+          </button>
+        </form>
+      </div>
+
+      <!-- 2. ADMIN DASHBOARD (Authenticated) -->
+      <div id="adminDashboard" class="hidden space-y-12">
+        <!-- Toast Notification Area -->
+        <div id="adminToast" class="hidden fixed top-24 right-6 z-50 bg-[#121212] border-2 border-[#D4AF37] text-[#F5F1EB] p-4 rounded-xs shadow-[0_10px_35px_rgba(0,0,0,0.9)] max-w-sm transition-all transform">
+          <div class="flex items-center gap-3">
+            <span class="text-emerald-400 font-bold text-lg">&#10003;</span>
+            <p id="toastMessage" class="font-body text-xs font-medium"></p>
+          </div>
+        </div>
+
+        <!-- Header Title Banner -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-[#D4AF37]/20">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37] text-[10px] tracking-[2px] uppercase font-light mb-2">
+              <span>Sertãozinho · SP · Brasil</span>
+            </div>
+            <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl text-[#F5F1EB] font-normal">
+              Painel de <em class="italic text-[#D4AF37] font-normal">Controle de Perfumes</em>
+            </h1>
+            <p class="font-body text-xs sm:text-sm text-[#B8AF9E] font-light mt-1">
+              Edite fotos, referências, valores de 60ml/15ml e descrições. Tudo salvo em JSON na chave <strong class="text-[#D4AF37]">smellgood_produtos</strong> no LocalStorage.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button
+              id="btnReset48"
+              class="px-4 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#D4AF37]/35 text-[#B8AF9E] hover:text-[#F5F1EB] font-body text-xs uppercase tracking-[1.5px] font-light rounded-xs transition-colors cursor-pointer"
+              title="Restaura os 48 perfumes padrão originais"
+            >
+              Restaurar 48 Padrão
+            </button>
+          </div>
+        </div>
+
+        <!-- FORMULÁRIO DE CADASTRO E EDIÇÃO -->
+        <div id="formCard" class="bg-[#121212] border border-[#D4AF37]/35 p-6 sm:p-8 rounded-sm shadow-xl space-y-8 transition-all">
+          <div class="flex items-center justify-between border-b border-[#D4AF37]/20 pb-4">
+            <div>
+              <h2 id="formTitle" class="font-display text-2xl sm:text-3xl text-[#F5F1EB] font-normal tracking-wide">
+                Cadastrar Novo Perfume
+              </h2>
+              <p id="formSubtitle" class="font-body text-xs text-[#B8AF9E] font-light mt-0.5">
+                Preencha os dados e foto para disponibilizar imediatamente na loja.
+              </p>
+            </div>
+            <button
+              id="btnCancelEdit"
+              type="button"
+              class="hidden px-3.5 py-1.5 bg-[#1A1A1A] border border-[#888] text-[#DDD] hover:text-white text-xs uppercase tracking-[1.5px] rounded-xs cursor-pointer"
+            >
+              Cancelar Edição
+            </button>
+          </div>
+
+          <form id="productForm" class="space-y-6">
+            <input type="hidden" id="editingProductId" value="" />
+
+            <!-- 1. UPLOAD DE FOTO (CONVERTER PARA BASE64) -->
+            <div>
+              <label class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                1. Foto do Perfume (Upload / Arrasta e Solta para Base64)
+              </label>
+              
+              <div
+                id="dropZone"
+                class="relative border-2 border-dashed border-[#D4AF37]/40 hover:border-[#D4AF37] bg-[#0A0A0A] p-6 rounded-sm text-center transition-all cursor-pointer group"
+              >
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept="image/*"
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                />
+
+                <div id="dropZonePrompt" class="space-y-3">
+                  <div class="w-12 h-12 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-body text-xs sm:text-sm text-[#F5F1EB] font-medium">
+                      Arraste e solte a foto aqui ou <span class="text-[#D4AF37] underline">clique para selecionar</span>
+                    </p>
+                    <p class="font-body text-[10px] text-[#888] font-light mt-1">
+                      A imagem será convertida para Base64 e salva no LocalStorage. Se vazia, a loja usa a renderização oficial 60ml/15ml.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Preview container -->
+                <div id="previewContainer" class="hidden flex flex-col items-center gap-3">
+                  <div class="relative w-40 h-40 border border-[#D4AF37]/50 rounded-xs overflow-hidden bg-[#000] p-2">
+                    <img id="imagePreview" src="" alt="Preview da Foto" class="w-full h-full object-contain" />
+                  </div>
+                  <button
+                    type="button"
+                    id="btnRemoveImage"
+                    class="relative z-20 font-body text-xs text-red-400 hover:text-red-300 underline cursor-pointer"
+                  >
+                    Remover Foto
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ROW: REF & NOME DA INSPIRAÇÃO -->
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
+              <!-- Código REF -->
+              <div class="sm:col-span-4">
+                <label for="inputRef" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                  2. Código REF *
+                </label>
+                <div class="relative">
+                  <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-[#888] font-bold">REF</span>
+                  <input
+                    type="text"
+                    id="inputRef"
+                    placeholder="02"
+                    required
+                    class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 pl-14 pr-4 py-3 text-sm text-[#F5F1EB] placeholder-[#666] focus:border-[#D4AF37] focus:outline-none rounded-xs font-semibold"
+                  />
+                </div>
+                <p class="font-body text-[10px] text-[#888] font-light mt-1">Exemplo: 02, 05, 25, 69, 212</p>
+              </div>
+
+              <!-- Nome da Inspiração -->
+              <div class="sm:col-span-8">
+                <label for="inputName" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                  3. Nome da Inspiração *
+                </label>
+                <input
+                  type="text"
+                  id="inputName"
+                  placeholder="Ex: 1 Million, Sauvage, Invictus..."
+                  required
+                  class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 px-4 py-3 text-sm text-[#F5F1EB] placeholder-[#666] focus:border-[#D4AF37] focus:outline-none rounded-xs"
+                />
+                <p class="font-body text-[10px] text-[#888] font-light mt-1">Será exibido na loja como: <strong>REF [Código] - [Nome]</strong></p>
+              </div>
+            </div>
+
+            <!-- ROW: GÊNERO & CATEGORIA (Noite/Festa, Dia/Trabalho) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- Gênero -->
+              <div>
+                <label for="inputGender" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                  4. Gênero *
+                </label>
+                <select
+                  id="inputGender"
+                  class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 px-4 py-3 text-xs sm:text-sm text-[#F5F1EB] focus:border-[#D4AF37] focus:outline-none rounded-xs"
+                >
+                  <option value="masculino">Masculino</option>
+                  <option value="feminino">Feminino</option>
+                  <option value="unissex">Unissex</option>
+                </select>
+              </div>
+
+              <!-- Categoria / Ocasião (Noite/Festa, Dia/Trabalho) -->
+              <div>
+                <label for="inputOccasion" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                  5. Categoria de Uso *
+                </label>
+                <select
+                  id="inputOccasion"
+                  class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 px-4 py-3 text-xs sm:text-sm text-[#F5F1EB] focus:border-[#D4AF37] focus:outline-none rounded-xs"
+                >
+                  <option value="Noite/Festa">Noite / Festa</option>
+                  <option value="Dia/Trabalho">Dia / Trabalho</option>
+                  <option value="Encontros/Sedutor">Encontros &amp; Sedutor</option>
+                  <option value="Casual/Verão">Casual &amp; Verão</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ROW: PREÇO 60ML, PREÇO 15ML, FAMÍLIA -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <!-- Preço 60ml -->
+              <div>
+                <label for="inputPrice60" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                  6. Preço 60ml (R$) *
+                </label>
+                <div class="relative">
+                  <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-[#888]">R$</span>
+                  <input
+                    type="number"
+                    id="inputPrice60"
+                    step="0.01"
+                    min="1"
+                    value="79.90"
+                    required
+                    class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 pl-11 pr-4 py-3 text-sm text-[#F5F1EB] focus:border-[#D4AF37] focus:outline-none rounded-xs font-semibold"
+                  />
+                </div>
+                <p class="font-body text-[10px] text-[#888] font-light mt-1">Padrão oficial: R$ 79,90</p>
+              </div>
+
+              <!-- Preço 15ml -->
+              <div>
+                <label for="inputPrice15" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                  7. Preço 15ml Pocket (R$) *
+                </label>
+                <div class="relative">
+                  <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-[#888]">R$</span>
+                  <input
+                    type="number"
+                    id="inputPrice15"
+                    step="0.01"
+                    min="1"
+                    value="29.90"
+                    required
+                    class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 pl-11 pr-4 py-3 text-sm text-[#F5F1EB] focus:border-[#D4AF37] focus:outline-none rounded-xs font-semibold"
+                  />
+                </div>
+                <p class="font-body text-[10px] text-[#888] font-light mt-1">Padrão oficial: R$ 29,90</p>
+              </div>
+
+              <!-- Família Olfativa -->
+              <div>
+                <label for="inputFamily" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                  8. Família Olfativa
+                </label>
+                <select
+                  id="inputFamily"
+                  class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 px-4 py-3 text-xs sm:text-sm text-[#F5F1EB] focus:border-[#D4AF37] focus:outline-none rounded-xs"
+                >
+                  <option value="Amadeirado">Amadeirado</option>
+                  <option value="Doce">Doce</option>
+                  <option value="Fresco">Fresco</option>
+                  <option value="Cítrico">Cítrico</option>
+                  <option value="Floral">Floral</option>
+                  <option value="Oriental">Oriental</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Descrição Curta -->
+            <div>
+              <label for="inputDescription" class="block text-xs uppercase tracking-[2px] text-[#D4AF37] font-semibold mb-2">
+                9. Descrição e Notas Olfativas
+              </label>
+              <textarea
+                id="inputDescription"
+                rows="3"
+                placeholder="Descreva as notas principais (topo, coração, base) e a proposta sensorial..."
+                class="w-full bg-[#0A0A0A] border border-[#D4AF37]/35 px-4 py-3 text-xs sm:text-sm text-[#F5F1EB] placeholder-[#666] focus:border-[#D4AF37] focus:outline-none rounded-xs"
+              ></textarea>
+            </div>
+
+            <!-- Botão Salvar / Atualizar -->
+            <div class="flex items-center gap-3 pt-2">
+              <button
+                type="submit"
+                id="btnSubmitForm"
+                class="px-8 py-4 bg-[#D4AF37] hover:bg-[#E5C464] text-[#0A0A0A] text-xs uppercase tracking-[3px] font-bold transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] rounded-xs cursor-pointer flex items-center justify-center gap-2"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2zM17 21v-8H7v8h10zM7 3v5h8V3H7z"/>
+                </svg>
+                <span id="btnSubmitText">SALVAR PERFUME NA LOJA</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- LISTA DOS 48 PERFUMES (COM BOTÃO EDITAR E EXCLUIR) -->
+        <div class="space-y-6 pt-4">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[#D4AF37]/20">
+            <div>
+              <h3 class="font-display text-2xl sm:text-3xl text-[#F5F1EB] font-normal">
+                Catálogo de Perfumes (<span id="totalCountSpan" class="text-[#D4AF37] font-semibold">48</span>)
+              </h3>
+              <p class="font-body text-xs text-[#B8AF9E] font-light mt-0.5">
+                Clique em <strong>Editar</strong> para carregar os dados no formulário acima ou <strong>Excluir</strong> para remover.
+              </p>
+            </div>
+
+            <!-- Quick Search Filter in Admin List -->
+            <div class="relative w-full sm:w-72">
+              <input
+                type="text"
+                id="adminSearchInput"
+                placeholder="Filtrar por REF ou Nome..."
+                class="w-full bg-[#121212] border border-[#D4AF37]/35 px-4 py-2.5 text-xs text-[#F5F1EB] placeholder-[#777] rounded-xs focus:outline-none focus:border-[#D4AF37]"
+              />
+            </div>
+          </div>
+
+          <!-- Product Cards Grid -->
+          <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="border-t border-[#D4AF37]/20 py-8 text-center text-xs text-[#888] mt-16 font-body font-light">
+      <p>© SMELL GOOD Perfumes Artesanais — Sertãozinho - Brasil · Armazenamento LocalStorage [smellgood_produtos]</p>
+    </footer>
+
+    <!-- SCRIPT DE GERENCIAMENTO (LOCALSTORAGE EM smellgood_produtos) -->
+    <script>
+      (function() {
+        const STORAGE_KEY = 'smellgood_produtos';
+        const AUTH_STORAGE_KEY = 'smellgood_admin_auth';
+        const REQUIRED_PASS = 'smellgood2026';
+        const FALLBACK_PASS = 'admin123';
+
+        let productsList = [];
+        let uploadedBase64Image = '';
+
+        // DOM References
+        const authScreen = document.getElementById('authScreen');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const headerActions = document.getElementById('headerActions');
+        const authForm = document.getElementById('authForm');
+        const adminPassword = document.getElementById('adminPassword');
+        const authError = document.getElementById('authError');
+        const btnLogout = document.getElementById('btnLogout');
+        const productForm = document.getElementById('productForm');
+        const formCard = document.getElementById('formCard');
+        const formTitle = document.getElementById('formTitle');
+        const formSubtitle = document.getElementById('formSubtitle');
+        const btnSubmitText = document.getElementById('btnSubmitText');
+        const btnCancelEdit = document.getElementById('btnCancelEdit');
+        const editingProductId = document.getElementById('editingProductId');
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const dropZonePrompt = document.getElementById('dropZonePrompt');
+        const previewContainer = document.getElementById('previewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const btnRemoveImage = document.getElementById('btnRemoveImage');
+        const productsGrid = document.getElementById('productsGrid');
+        const totalCountSpan = document.getElementById('totalCountSpan');
+        const adminSearchInput = document.getElementById('adminSearchInput');
+        const btnReset48 = document.getElementById('btnReset48');
+        const btnExportJson = document.getElementById('btnExportJson');
+        const importJsonInput = document.getElementById('importJsonInput');
+        const adminToast = document.getElementById('adminToast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // Toast feedback
+        let toastTimer;
+        function showToast(msg) {
+          toastMessage.textContent = msg;
+          adminToast.classList.remove('hidden');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => {
+            adminToast.classList.add('hidden');
+          }, 3500);
+        }
+
+        // Authentication Check
+        function checkAuth() {
+          const isAuth = sessionStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+          if (isAuth) {
+            authScreen.classList.add('hidden');
+            adminDashboard.classList.remove('hidden');
+            headerActions.classList.remove('hidden');
+            loadProducts();
+          } else {
+            authScreen.classList.remove('hidden');
+            adminDashboard.classList.add('hidden');
+            headerActions.classList.add('hidden');
+          }
+        }
+
+        authForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const val = adminPassword.value.trim();
+          if (val === REQUIRED_PASS || val === FALLBACK_PASS) {
+            sessionStorage.setItem(AUTH_STORAGE_KEY, 'true');
+            authError.classList.add('hidden');
+            adminPassword.value = '';
+            checkAuth();
+          } else {
+            authError.classList.remove('hidden');
+          }
+        });
+
+        btnLogout.addEventListener('click', function() {
+          sessionStorage.removeItem(AUTH_STORAGE_KEY);
+          checkAuth();
+        });
+
+        // Load Products from LocalStorage (key: smellgood_produtos)
+        const USER_WEBP_IMAGES = [
+          'https://i.postimg.cc/RW6JBLVj/download-(2).webp',
+          'https://i.postimg.cc/YvGLHzqy/download-(3).webp',
+          'https://i.postimg.cc/zybHrFXd/download-(4).webp',
+          'https://i.postimg.cc/0bHKFBxf/download-(5).webp',
+          'https://i.postimg.cc/N5P2SzYZ/download-(6).webp',
+          'https://i.postimg.cc/WhfqCHj8/download-(7).webp',
+          'https://i.postimg.cc/8jnf90Dt/download-(8).webp',
+          'https://i.postimg.cc/dLSZpxvn/download-(9).webp',
+          'https://i.postimg.cc/0bHKFBxf/download-(10).webp',
+          'https://i.postimg.cc/1fYV2jPN/download-(11).webp',
+          'https://i.postimg.cc/TpH5F4Gg/download-(12).webp',
+          'https://i.postimg.cc/HVP8RhH8/download-(13).webp',
+          'https://i.postimg.cc/PPq86jGD/download-(14).webp',
+          'https://i.postimg.cc/3dwDLTMv/download-(15).webp',
+          'https://i.postimg.cc/YhSmXHcv/download-(16).webp',
+          'https://i.postimg.cc/LnsZypdh/download-(17).webp',
+          'https://i.postimg.cc/rKpthk6F/download-(18).webp',
+          'https://i.postimg.cc/fJb0HN4W/download-(19).webp',
+          'https://i.postimg.cc/SJKzZh0y/download-(20).webp',
+          'https://i.postimg.cc/ppdn0HNR/download-(21).webp',
+          'https://i.postimg.cc/4m3h8gCR/download-(22).webp',
+          'https://i.postimg.cc/JtxkchFz/download-(23).webp',
+          'https://i.postimg.cc/8s46BCYk/download-(24).webp',
+          'https://i.postimg.cc/fkC9jbPT/download-(25).webp',
+          'https://i.postimg.cc/F1pLgK6t/download-(26).webp',
+          'https://i.postimg.cc/SjdM7KPF/download-(27).webp',
+          'https://i.postimg.cc/23GZF5Ks/download-(28).webp',
+          'https://i.postimg.cc/8s46BC0q/download-(29).webp',
+          'https://i.postimg.cc/w32mcBGW/download-(30).webp',
+          'https://i.postimg.cc/9zb7tfn8/download-(31).webp',
+          'https://i.postimg.cc/Hjzy4Lh6/download-(32).webp',
+          'https://i.postimg.cc/7b92MLWt/download-(33).webp',
+        ];
+
+        const USER_POCKET_IMAGES = [
+          'https://i.postimg.cc/gnBLQTmF/download.png',
+          'https://i.postimg.cc/N50rNchx/download-(1).png',
+          'https://i.postimg.cc/KRYg92Xk/download-(2).png',
+        ];
+
+        async function loadProducts() {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              if (Array.isArray(parsed) && parsed.length > 0) {
+                let hasChanges = false;
+                productsList = parsed.map((p, idx) => {
+                  let updated = { ...p };
+                  if (updated.price_60ml === 100 || updated.price_60ml === 30 || !updated.price_60ml) {
+                    updated.price_60ml = 79.90;
+                    updated.price = 79.90;
+                    hasChanges = true;
+                  }
+                  if (updated.price_15ml === 35 || updated.price_15ml === 30 || !updated.price_15ml) {
+                    updated.price_15ml = 29.90;
+                    hasChanges = true;
+                  }
+                  const wImg = USER_WEBP_IMAGES[idx % USER_WEBP_IMAGES.length];
+                  const pImg = USER_POCKET_IMAGES[idx % USER_POCKET_IMAGES.length];
+                  if (!updated.imagem || !updated.image || updated.image.endsWith('.svg') || updated.image.includes('Screenshot') || !updated.image_60ml || updated.image === 'https://i.postimg.cc/0bHKFBxf/download-10.webp') {
+                    updated.image = wImg;
+                    updated.imagem = wImg;
+                    updated.image_60ml = wImg;
+                    updated.image_15ml = pImg;
+                    updated.image15ml = pImg;
+                    hasChanges = true;
+                  }
+                  return updated;
+                });
+                if (hasChanges) {
+                  saveProducts(productsList, false);
+                }
+                renderProducts();
+                return;
+              }
+            }
+
+            // Fallback: fetch /produtos.json
+            const res = await fetch('/produtos.json');
+            if (res.ok) {
+              const data = await res.json();
+              if (Array.isArray(data) && data.length > 0) {
+                productsList = data;
+                saveProducts(productsList, false);
+                renderProducts();
+                return;
+              }
+            }
+          } catch (err) {
+            console.error('Error loading products:', err);
+          }
+          renderProducts();
+        }
+
+        function saveProducts(list, notifyStore = true) {
+          productsList = list;
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            if (notifyStore) {
+              window.dispatchEvent(new Event('smellgood_produtos_updated'));
+              window.dispatchEvent(new Event('smellgood_products_updated'));
+              window.dispatchEvent(new Event('storage'));
+            }
+          } catch (err) {
+            console.error('LocalStorage save error:', err);
+            showToast('Erro ao salvar no LocalStorage.');
+          }
+          renderProducts();
+        }
+
+        // Render List of Products with EDITAR and EXCLUIR buttons
+        function renderProducts(query = '') {
+          const filter = query.toLowerCase().trim();
+          const filtered = productsList.filter(p => {
+            if (!filter) return true;
+            const refStr = (p.ref || p.numberCode || '').toLowerCase();
+            const nameStr = (p.name || '').toLowerCase();
+            const fullRef = (p.refFormatted || '').toLowerCase();
+            return refStr.includes(filter) || nameStr.includes(filter) || fullRef.includes(filter);
+          });
+
+          totalCountSpan.textContent = productsList.length;
+          productsGrid.innerHTML = '';
+
+          if (filtered.length === 0) {
+            productsGrid.innerHTML = `
+              <div class="col-span-full py-16 text-center bg-[#121212] border border-[#D4AF37]/20 rounded-xs">
+                <p class="font-display text-lg text-[#F5F1EB]">Nenhum perfume encontrado.</p>
+                <p class="font-body text-xs text-[#888] mt-1">Tente buscar por outro termo ou cadastre um novo perfume acima.</p>
+              </div>
+            `;
+            return;
+          }
+
+          filtered.forEach(p => {
+            const refCode = p.ref || p.numberCode || '01';
+            const refTitle = p.refFormatted || `REF ${refCode} - ${p.name}`;
+            const price60Val = parseFloat(p.price_60ml || p.price || 79.90).toFixed(2).replace('.', ',');
+            const price15Val = parseFloat(p.price_15ml || 29.90).toFixed(2).replace('.', ',');
+            const occasionVal = p.notes?.occasion || p.occasion || 'Noite/Festa';
+
+            const card = document.createElement('div');
+            card.className = 'bg-[#121212] border border-[#D4AF37]/30 hover:border-[#D4AF37] p-5 rounded-sm flex flex-col justify-between transition-all shadow-md';
+
+            card.innerHTML = `
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] tracking-[1.5px] uppercase font-bold text-[#D4AF37] bg-[#D4AF37]/15 border border-[#D4AF37]/40 px-2 py-0.5 rounded-xs">
+                    REF ${refCode}
+                  </span>
+                  <span class="font-body text-[9px] uppercase tracking-wider text-[#B8AF9E] bg-[#1A1A1A] px-2 py-0.5 rounded-xs border border-white/10 font-light">
+                    ${p.category || 'Masculino'} · ${occasionVal}
+                  </span>
+                </div>
+
+                <!-- Bottle Visual / Image Preview: <img src="${produto.imagem}" class="w-full h-40 object-cover"> -->
+                <div class="w-full h-40 bg-[#070707] rounded-xs border border-[#D4AF37]/20 flex items-center justify-center overflow-hidden relative">
+                  ${(() => {
+                    const imgUrl = p.imagem || p.image || '';
+                    if (!imgUrl) {
+                      return `
+                        <div class="text-center">
+                          <svg class="w-12 h-12 text-[#D4AF37] mx-auto opacity-80 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="7" y="9" width="10" height="13" rx="2"/>
+                            <path d="M10 5h4v4h-4z"/>
+                            <path d="M12 2v3"/>
+                          </svg>
+                          <span class="font-display text-[10px] uppercase tracking-[1px] text-[#D4AF37] block">Alta Perfumaria Artesanal</span>
+                          <span class="font-body text-[8px] text-[#888] block font-light">Sensual e Envolvente</span>
+                        </div>
+                      `;
+                    }
+
+                    const famLower = (p.family || p.notes?.family || '').toLowerCase();
+                    const isSweet = famLower.includes('doce') || famLower.includes('gourmand') || famLower.includes('baunilha');
+                    const isFresh = famLower.includes('aquát') || famLower.includes('fresc') || famLower.includes('marinho') || famLower.includes('aromát');
+                    const isWoody = !isSweet && !isFresh && (famLower.includes('amadeir') || famLower.includes('madeira') || famLower.includes('vetiver') || famLower.includes('couro'));
+                    const isFloral = !isSweet && (famLower.includes('floral') || famLower.includes('cítric') || famLower.includes('chipre') || famLower.includes('frutal') || famLower.includes('ros'));
+
+                    let filterStyle = '';
+                    if (p.filtro === 'mais_escuro' || isWoody) {
+                      filterStyle = 'filter: brightness(0.78) contrast(1.25) saturate(0.88);';
+                    } else if (p.filtro === 'rosado' || isFloral) {
+                      filterStyle = 'filter: hue-rotate(325deg) saturate(1.22) brightness(0.96);';
+                    }
+
+                    const isScreenshot = imgUrl.includes('Screenshot');
+                    const posStyle = isScreenshot
+                      ? (isFresh || isFloral ? 'object-position: center 28%;' : 'object-position: center 58%;')
+                      : 'object-position: center; object-fit: contain; padding: 6px;';
+
+                    const fallback = 'https://i.postimg.cc/0bHKFBxf/download-10.webp';
+
+                    const sensualTag = isSweet ? 'Doce na Medida Certa' : (isFresh ? 'Fresco e Sofisticado' : (isWoody ? 'Presença Marcante' : (isFloral ? 'Sensual e Envolvente' : 'Elegância Atemporal')));
+
+                    return `
+                      <img
+                        src="${imgUrl}"
+                        alt="${refTitle}"
+                        class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        style="${posStyle} ${filterStyle}"
+                        onerror="this.src='${fallback}'"
+                      />
+                      <span class="absolute bottom-2 right-2 bg-black/90 text-[8px] text-[#D4AF37] px-2 py-0.5 rounded-xs border border-[#D4AF37]/40 tracking-wider">
+                        ${sensualTag}
+                      </span>
+                    `;
+                  })()}
+                </div>
+
+                <div>
+                  <h4 class="font-display text-lg text-[#F5F1EB] font-normal tracking-wide line-clamp-1">${refTitle}</h4>
+                  <p class="font-body text-[11px] text-[#888] line-clamp-2 mt-1 font-light leading-relaxed">${p.description || 'Fragrância artesanal com alta fixação de 6h a 10h*.'}</p>
+                </div>
+              </div>
+
+              <div class="pt-4 mt-4 border-t border-[#D4AF37]/20 space-y-3">
+                <div class="flex items-center justify-between text-xs">
+                  <div>
+                    <span class="font-body text-[8px] uppercase tracking-wider text-[#888] block font-light">Frasco 60ml</span>
+                    <span class="font-display text-lg text-[#D4AF37] font-semibold">R$ ${price60Val}</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="font-body text-[8px] uppercase tracking-wider text-[#888] block font-light">Pocket 15ml</span>
+                    <span class="font-display text-lg text-[#F5F1EB] font-normal">R$ ${price15Val}</span>
+                  </div>
+                </div>
+
+                <!-- 1. BOTÕES EDITAR E EXCLUIR -->
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                  <button
+                    data-id="${p.id}"
+                    class="btnEditProduct w-full py-2 bg-[#D4AF37]/15 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-[#0A0A0A] border border-[#D4AF37]/50 text-[10px] uppercase tracking-[1.5px] font-semibold rounded-xs transition-all flex items-center justify-center gap-1 cursor-pointer"
+                  >
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                    </svg>
+                    <span>EDITAR</span>
+                  </button>
+
+                  <button
+                    data-id="${p.id}"
+                    class="btnDeleteProduct w-full py-2 bg-red-950/60 hover:bg-red-900 border border-red-700/50 text-red-200 text-[10px] uppercase tracking-[1.5px] rounded-xs transition-all flex items-center justify-center gap-1 cursor-pointer"
+                  >
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                    </svg>
+                    <span>EXCLUIR</span>
+                  </button>
+                </div>
+              </div>
+            `;
+            productsGrid.appendChild(card);
+          });
+
+          // Attach Edit & Delete Listeners
+          document.querySelectorAll('.btnEditProduct').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const id = this.getAttribute('data-id');
+              startEditProduct(id);
+            });
+          });
+
+          document.querySelectorAll('.btnDeleteProduct').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const id = this.getAttribute('data-id');
+              deleteProduct(id);
+            });
+          });
+        }
+
+        // Live Search in Admin List
+        adminSearchInput.addEventListener('input', function(e) {
+          renderProducts(e.target.value);
+        });
+
+        // Photo Upload Drag & Drop & Base64 Conversion
+        ['dragenter', 'dragover'].forEach(name => {
+          dropZone.addEventListener(name, (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-[#D4AF37]', 'bg-[#181818]');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(name => {
+          dropZone.addEventListener(name, (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-[#D4AF37]', 'bg-[#181818]');
+          });
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+          if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleImageFile(e.dataTransfer.files[0]);
+          }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+          if (fileInput.files && fileInput.files.length > 0) {
+            handleImageFile(fileInput.files[0]);
+          }
+        });
+
+        function handleImageFile(file) {
+          if (!file.type.startsWith('image/')) {
+            showToast('Por favor, envie um arquivo de imagem válido (PNG, JPG, WEBP).');
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            const rawUrl = evt.target.result;
+            // Compress image via canvas to stay safely within LocalStorage limits
+            compressBase64Image(rawUrl, 800, 0.82, function(compressed) {
+              uploadedBase64Image = compressed;
+              imagePreview.src = compressed;
+              dropZonePrompt.classList.add('hidden');
+              previewContainer.classList.remove('hidden');
+            });
+          };
+          reader.readAsDataURL(file);
+        }
+
+        function compressBase64Image(src, maxWidth, quality, callback) {
+          const img = new Image();
+          img.onload = function() {
+            let w = img.width;
+            let h = img.height;
+            if (w > maxWidth) {
+              h = Math.round((h * maxWidth) / w);
+              w = maxWidth;
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            callback(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.src = src;
+        }
+
+        btnRemoveImage.addEventListener('click', function(e) {
+          e.stopPropagation();
+          uploadedBase64Image = '';
+          fileInput.value = '';
+          imagePreview.src = '';
+          previewContainer.classList.add('hidden');
+          dropZonePrompt.classList.remove('hidden');
+        });
+
+        // 1. EDITAR: Load product into form
+        function startEditProduct(id) {
+          const p = productsList.find(item => item.id === id);
+          if (!p) return;
+
+          editingProductId.value = p.id;
+          document.getElementById('inputRef').value = p.ref || p.numberCode || '';
+          document.getElementById('inputName').value = p.name || '';
+          document.getElementById('inputGender').value = p.category === 'feminino' || p.category === 'feminina' ? 'feminino' : (p.category === 'unissex' ? 'unissex' : 'masculino');
+          document.getElementById('inputOccasion').value = p.notes?.occasion || p.occasion || 'Noite/Festa';
+          let p60 = (p.price_60ml || p.price || 79.90);
+          if (p60 === 100 || p60 === 30) p60 = 79.90;
+          let p15 = (p.price_15ml || 29.90);
+          if (p15 === 35 || p15 === 30) p15 = 29.90;
+
+          document.getElementById('inputPrice60').value = p60.toFixed(2);
+          document.getElementById('inputPrice15').value = p15.toFixed(2);
+          document.getElementById('inputFamily').value = p.family || p.notes?.family || 'Amadeirado';
+          document.getElementById('inputDescription').value = p.description || '';
+
+          const curImg = p.imagem || p.image || '';
+          if (curImg) {
+            uploadedBase64Image = curImg;
+            imagePreview.src = curImg;
+            dropZonePrompt.classList.add('hidden');
+            previewContainer.classList.remove('hidden');
+          } else {
+            uploadedBase64Image = '';
+            imagePreview.src = '';
+            previewContainer.classList.add('hidden');
+            dropZonePrompt.classList.remove('hidden');
+          }
+
+          // UI changes for edit mode
+          formTitle.innerHTML = `Editando: <em class="italic text-[#D4AF37]">REF ${p.ref || p.numberCode} - ${p.name}</em>`;
+          formSubtitle.textContent = 'Altere os campos necessários e clique em Atualizar Perfume.';
+          btnSubmitText.textContent = `ATUALIZAR PERFUME (REF ${p.ref || p.numberCode})`;
+          btnCancelEdit.classList.remove('hidden');
+          formCard.classList.add('border-[#D4AF37]', 'shadow-[0_0_35px_rgba(212,175,55,0.2)]');
+
+          // Scroll to form
+          formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        btnCancelEdit.addEventListener('click', cancelEdit);
+
+        function cancelEdit() {
+          editingProductId.value = '';
+          productForm.reset();
+          document.getElementById('inputPrice60').value = '79.90';
+          document.getElementById('inputPrice15').value = '29.90';
+          uploadedBase64Image = '';
+          imagePreview.src = '';
+          previewContainer.classList.add('hidden');
+          dropZonePrompt.classList.remove('hidden');
+
+          formTitle.textContent = 'Cadastrar Novo Perfume';
+          formSubtitle.textContent = 'Preencha os dados e foto para disponibilizar imediatamente na loja.';
+          btnSubmitText.textContent = 'SALVAR PERFUME NA LOJA';
+          btnCancelEdit.classList.add('hidden');
+          formCard.classList.remove('border-[#D4AF37]', 'shadow-[0_0_35px_rgba(212,175,55,0.2)]');
+        }
+
+        // 1. EXCLUIR Product
+        function deleteProduct(id) {
+          const p = productsList.find(item => item.id === id);
+          const nameStr = p ? (p.refFormatted || `REF ${p.ref} - ${p.name}`) : 'este perfume';
+
+          if (confirm(`Tem certeza que deseja excluir ${nameStr} do catálogo da loja?`)) {
+            const updated = productsList.filter(item => item.id !== id);
+            saveProducts(updated);
+            showToast(`${nameStr} excluído do catálogo com sucesso.`);
+            if (editingProductId.value === id) {
+              cancelEdit();
+            }
+          }
+        }
+
+        // 2 & 3. SUBMIT FORM: Salvar ou Atualizar
+        productForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const editId = editingProductId.value.trim();
+          const ref = document.getElementById('inputRef').value.trim();
+          const name = document.getElementById('inputName').value.trim();
+          const gender = document.getElementById('inputGender').value;
+          const occasion = document.getElementById('inputOccasion').value;
+          const price60 = parseFloat(document.getElementById('inputPrice60').value) || 100.0;
+          const price15 = parseFloat(document.getElementById('inputPrice15').value) || 35.0;
+          const family = document.getElementById('inputFamily').value;
+          const description = document.getElementById('inputDescription').value.trim();
+
+          if (!ref || !name) {
+            showToast('Por favor, informe a REF e o Nome do perfume.');
+            return;
+          }
+
+          const refFormatted = `REF ${ref} - ${name}`;
+
+          if (editId) {
+            // Update existing
+            const index = productsList.findIndex(item => item.id === editId);
+            if (index >= 0) {
+              const prev = productsList[index];
+              productsList[index] = {
+                ...prev,
+                ref: ref,
+                refFormatted: refFormatted,
+                numberCode: ref,
+                name: name,
+                brandInspiration: name,
+                category: gender,
+                family: family,
+                price: price60,
+                price_60ml: price60,
+                price_15ml: price15,
+                description: description || prev.description,
+                image: uploadedBase64Image || prev.imagem || prev.image || 'https://i.postimg.cc/0bHKFBxf/download-10.webp',
+                imagem: uploadedBase64Image || prev.imagem || prev.image || 'https://i.postimg.cc/0bHKFBxf/download-10.webp',
+                image_60ml: uploadedBase64Image || prev.image_60ml || 'https://i.postimg.cc/0bHKFBxf/download-10.webp',
+                image_15ml: prev.image_15ml || 'https://i.postimg.cc/N50rNchx/download-1.png',
+                image15ml: prev.image15ml || 'https://i.postimg.cc/N50rNchx/download-1.png',
+                filtro: prev.filtro || (family === 'Amadeirado' ? 'mais_escuro' : (family === 'Floral' || family === 'Cítrico' ? 'rosado' : 'padrao')),
+                notes: {
+                  ...(prev.notes || {}),
+                  family: family,
+                  occasion: occasion,
+                }
+              };
+              saveProducts(productsList);
+              showToast(`${refFormatted} atualizado com sucesso!`);
+              cancelEdit();
+              return;
+            }
+          }
+
+          // Create new
+          const defaultNewImg = 'https://i.postimg.cc/0bHKFBxf/download-10.webp';
+          const defaultNew15Img = 'https://i.postimg.cc/N50rNchx/download-1.png';
+          const defaultFilter = (family === 'Amadeirado') ? 'mais_escuro' : ((family === 'Floral' || family === 'Cítrico') ? 'rosado' : 'padrao');
+
+          const newProd = {
+            id: 'ref-' + ref.toLowerCase().replace(/[^a-z0-9]/g, '') + '-' + Date.now(),
+            ref: ref,
+            refFormatted: refFormatted,
+            numberCode: ref,
+            name: name,
+            brandInspiration: name,
+            category: gender,
+            family: family,
+            price: price60,
+            price_60ml: price60,
+            price_15ml: price15,
+            description: description || `Fragrância artesanal ${family} com curadoria editorial. Inspirada em ${name}, desenvolvida em Sertãozinho/SP com alta fixação de 6h a 10h*.`,
+            badge: 'Novo',
+            image: uploadedBase64Image || defaultNewImg,
+            imagem: uploadedBase64Image || defaultNewImg,
+            image_60ml: uploadedBase64Image || defaultNewImg,
+            image_15ml: defaultNew15Img,
+            image15ml: defaultNew15Img,
+            filtro: defaultFilter,
+            notes: {
+              family: family,
+              occasion: occasion,
+              intensity: 'Intenso',
+            }
+          };
+
+          // Add to beginning of array
+          const updated = [newProd, ...productsList.filter(p => (p.ref || p.numberCode) !== ref)];
+          saveProducts(updated);
+          showToast(`${refFormatted} cadastrado com sucesso! Já disponível na loja.`);
+          cancelEdit();
+        });
+
+        // 4. EXPORTAR JSON
+        btnExportJson.addEventListener('click', function() {
+          try {
+            const dataStr = JSON.stringify(productsList, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `smellgood_produtos_${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Arquivo JSON exportado com sucesso!');
+          } catch (err) {
+            console.error('Export error:', err);
+            showToast('Erro ao exportar JSON.');
+          }
+        });
+
+        // 4. IMPORTAR JSON
+        importJsonInput.addEventListener('change', function(e) {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            try {
+              const parsed = JSON.parse(evt.target.result);
+              if (!Array.isArray(parsed) || parsed.length === 0) {
+                showToast('O arquivo importado não contém uma lista válida de perfumes.');
+                return;
+              }
+
+              // Validate items have at least name or ref
+              const sanitized = parsed.map((item, idx) => {
+                const ref = item.ref || item.numberCode || String(idx + 1).padStart(2, '0');
+                const name = item.name || `Fragrância ${ref}`;
+                return {
+                  id: item.id || `ref-${ref}-${idx}`,
+                  ref: ref,
+                  refFormatted: item.refFormatted || `REF ${ref} - ${name}`,
+                  numberCode: ref,
+                  name: name,
+                  brandInspiration: item.brandInspiration || name,
+                  category: item.category || 'masculino',
+                  family: item.family || item.notes?.family || 'Amadeirado',
+                  price: parseFloat(item.price_60ml || item.price || 79.90),
+                  price_60ml: parseFloat(item.price_60ml || item.price || 79.90),
+                  price_15ml: parseFloat(item.price_15ml || 29.90),
+                  description: item.description || '',
+                  badge: item.badge || '',
+                  image: item.image || '',
+                  notes: item.notes || {
+                    family: item.family || 'Amadeirado',
+                    occasion: item.occasion || 'Noite/Festa',
+                    intensity: 'Intenso',
+                  },
+                };
+              });
+
+              if (confirm(`Deseja importar ${sanitized.length} perfumes e substituir a lista atual no LocalStorage?`)) {
+                saveProducts(sanitized);
+                showToast(`${sanitized.length} perfumes importados com sucesso!`);
+              }
+            } catch (err) {
+              console.error('Import parse error:', err);
+              showToast('Arquivo JSON inválido. Verifique o formato.');
+            }
+            importJsonInput.value = '';
+          };
+          reader.readAsText(file);
+        });
+
+        // Restaura os 48 Padrão
+        btnReset48.addEventListener('click', async function() {
+          if (confirm('Deseja restaurar os 48 perfumes originais da curadoria oficial da SMELL GOOD?')) {
+            try {
+              const res = await fetch('/produtos.json');
+              if (res.ok) {
+                const defaults = await res.json();
+                saveProducts(defaults);
+                showToast('48 perfumes padrão restaurados com sucesso!');
+                return;
+              }
+            } catch (err) {
+              console.error('Reset error:', err);
+            }
+            showToast('Erro ao recarregar 48 perfumes padrão.');
+          }
+        });
+
+        // Initial Auth check
+        checkAuth();
+      })();
+    </script>
+  </body>
+</html>
