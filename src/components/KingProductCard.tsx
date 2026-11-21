@@ -54,7 +54,7 @@ export const KingProductCard: React.FC<KingProductCardProps> = ({
   return (
     <div
       onClick={() => onOpenDetail(product)}
-      className="group relative bg-white border border-[#E5E5E5] hover:border-[#C59B27] rounded-xs p-3 sm:p-4 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer"
+      className="group relative bg-white border border-[#E5E5E5] hover:border-[#C59B27] rounded-xs p-2.5 sm:p-4 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-xl cursor-pointer min-w-0 w-full overflow-hidden"
     >
       <div>
         {/* CONTAINER DA FOTO GRANDE DO FRASCO EM FUNDO BRANCO LIMPO (IGUAL KING) */}
@@ -149,11 +149,11 @@ export const KingProductCard: React.FC<KingProductCardProps> = ({
 
         {/* BLOCO DE PREÇO: R$ 79,90 NO PIX EM VERDE + PARCELADO PEQUENO CINZA */}
         <div className="mt-2 text-left space-y-0.5">
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-[21px] sm:text-[22px] font-bold text-emerald-600 tracking-tight">
+          <div className="flex flex-wrap items-baseline gap-1 sm:gap-1.5">
+            <span className="font-serif text-[20px] sm:text-[22px] font-bold text-emerald-600 tracking-tight">
               {formattedPixPrice}
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-xs border border-emerald-200">
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-xs border border-emerald-200 whitespace-nowrap">
               NO PIX
             </span>
           </div>
@@ -164,14 +164,14 @@ export const KingProductCard: React.FC<KingProductCardProps> = ({
         </div>
       </div>
 
-      {/* BOTÕES DE AÇÃO: "Adicionar à sacolinha" DISCRETO COM BORDA FINA + "COMPRAR AGORA" */}
-      <div className="mt-3.5 pt-2.5 border-t border-gray-100 flex items-center gap-1.5">
+      {/* BOTÕES DE AÇÃO: Empilhados no mobile para caberem inteiros dentro do card; lado a lado no desktop */}
+      <div className="mt-3.5 pt-2.5 border-t border-gray-100 flex flex-col-reverse sm:flex-row items-stretch sm:items-center gap-1.5 w-full">
         
-        {/* Botão Discreto com Borda Fina: Adicionar à sacolinha (igual King, sem verde gritante!) */}
+        {/* Botão Discreto com Borda Fina: Adicionar à sacolinha */}
         <button
           type="button"
           onClick={handleAddToCart}
-          className={`flex-1 py-2 px-2 border rounded-xs text-[11px] sm:text-xs uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+          className={`w-full sm:flex-1 min-w-0 py-2 px-2 border rounded-xs text-[11px] uppercase tracking-wide font-semibold transition-all flex items-center justify-center gap-1 cursor-pointer ${
             addedAnimation
               ? 'border-emerald-600 bg-emerald-50 text-emerald-800'
               : 'border-[#CCCCCC] hover:border-[#111111] text-[#222222] hover:bg-[#111111] hover:text-white'
@@ -180,25 +180,25 @@ export const KingProductCard: React.FC<KingProductCardProps> = ({
         >
           {addedAnimation ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Adicionado!</span>
+              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span className="whitespace-nowrap">Adicionado!</span>
             </>
           ) : (
             <>
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span className="truncate">Sacolinha</span>
+              <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+              <span className="whitespace-nowrap">Sacolinha</span>
             </>
           )}
         </button>
 
-        {/* Botão Dourado: Comprar Agora */}
+        {/* Botão Dourado: Comprar */}
         <button
           type="button"
           onClick={handleDirectBuy}
-          className="flex-1 py-2 px-2 bg-gradient-to-r from-[#D4AF37] to-[#C59B27] hover:from-[#E5C464] hover:to-[#D4AF37] text-[#0A0A0A] text-[11px] sm:text-xs uppercase tracking-wider font-bold rounded-xs transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-1 cursor-pointer"
+          className="w-full sm:flex-1 min-w-0 py-2.5 sm:py-2 px-2 bg-gradient-to-r from-[#D4AF37] to-[#C59B27] hover:from-[#E5C464] hover:to-[#D4AF37] text-[#0A0A0A] text-[11px] sm:text-xs uppercase tracking-wide font-bold rounded-xs transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-1 cursor-pointer"
         >
-          <Zap className="w-3.5 h-3.5 fill-current" />
-          <span className="truncate">Comprar</span>
+          <Zap className="w-3.5 h-3.5 fill-current shrink-0" />
+          <span className="whitespace-nowrap">Comprar</span>
         </button>
       </div>
     </div>
